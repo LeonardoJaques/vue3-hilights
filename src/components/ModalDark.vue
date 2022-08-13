@@ -1,12 +1,10 @@
 <template>
   <teleport to=".modals-container">
-    <div class="modal" v-if="modelValue">
+    <div class="modal-dark" v-if="modelValue">
       <h1>{{ title }}</h1>
       <slot />
+      <!-- <button @click="$emit('update:modelValue', false)">Hide modal</button> -->
       <button @click="$emit('update:modelValue', false)">Hide modal</button>
-      <div>
-        Username is: {{ userData.username }}
-      </div>
     </div>
   </teleport>
 </template>
@@ -22,9 +20,6 @@ const props = defineProps({
     type: String,
     default: "No title specified",
   },
-  userData: {
-    type: Object,
-  }
 });
 // const emit = defineEmits(["update:modelValue"]);
 /*handle button click*/
@@ -32,8 +27,9 @@ const props = defineProps({
 </script>
 
 <style>
-.modal {
-  background: beige;
+.modal-dark {
+  background: #333;
+  color: #fff;
   padding: 10px;
   position: absolute;
   left: 0;
