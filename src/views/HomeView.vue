@@ -21,8 +21,11 @@
 /*
   Imports
 */
-import { ref, reactive, computed, watch, onMounted, nextTick } from "vue";
+import { ref, onMounted } from "vue";
 import { vAutofocus } from "@/directives/vAutofocus";
+import { useCounter } from "@/use/useCounter";
+
+
 /*
   App title
 */
@@ -33,36 +36,10 @@ onMounted(() => {
   console.log(`The app title is: ${appTitleRef.value.offsetWidth} px  wide!`);
 });
 
-/*
-    Counter
-  */
-const counterData = reactive({
-  count: 0,
-  title: "My Counter ",
-});
-const decreaseCounter = (amount) => (counterData.count -= amount);
-const increaseCounter = async (amount, e) => {
-  counterData.count += amount;
-  await nextTick();
-  console.log("Do something when counter has update in the dom");
-};
+/* Counter */
+const { counterData, decreaseCounter, increaseCounter, oddOrEven } = useCounter();
 
-watch(
-  () => counterData.count,
-  (newCount) => {
-    if (newCount === 20) {
-      alert("Way to go! You made it to 20!!!");
-    }
-  }
-);
 
-const oddOrEven = computed(() => {
-  if (counterData.count % 2 === 0) return "even";
-  return "odd";
-});
-onMounted(() => {
-  console.log("Do stuff related to Counter");
-});
 </script>
 
 <style>
@@ -70,11 +47,13 @@ onMounted(() => {
   text-align: center;
   padding: 20px;
 }
+
 .btn,
 .counter {
   font-size: 20px;
   margin: 10px;
 }
+
 .edit {
   margin-top: 60px;
 }
