@@ -12,6 +12,11 @@
 </template>
 
 <script setup>
+/*Imports */
+import { inject } from 'vue';
+
+
+
 /*Props */
 const props = defineProps({
   modelValue: {
@@ -22,10 +27,11 @@ const props = defineProps({
     type: String,
     default: "No title specified",
   },
-  userData: {
-    type: Object,
-  }
 });
+/*User Data */
+
+const userData = inject('userData')
+
 // const emit = defineEmits(["update:modelValue"]);
 /*handle button click*/
 // const handleButtonClick = () => emit("update:modelValue", false);

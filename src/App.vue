@@ -7,15 +7,20 @@
     <RouterLink to="/modals">Modals</RouterLink>
     <RouterLink to="/posts">Posts</RouterLink>
   </nav>
-  <RouterView :userData="userData" />
+  <RouterView />
 </template>
 <script setup>
 import { reactive } from "@vue/reactivity";
+import { provide } from "vue";
+
 
 const userData = reactive({
   name: "Leonardo",
   username: "leonardojaques"
 })
+
+provide('userData', userData)
+
 </script>
 <style scoped>
 header {
