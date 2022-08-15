@@ -1,9 +1,9 @@
 import { reactive, computed, watch, onMounted, nextTick } from "vue";
+const counterData = reactive({
+  count: 0,
+  title: "My Counter ",
+});
 export function useCounter() {
-  const counterData = reactive({
-    count: 0,
-    title: "My Counter ",
-  });
   const decreaseCounter = (amount) => (counterData.count -= amount);
   const increaseCounter = async (amount, e) => {
     counterData.count += amount;
