@@ -1,16 +1,27 @@
-import { defineStore } from 'pinia'
+import { defineStore, acceptHMRUpdate } from "pinia";
 
 export const useCounterStore = defineStore({
-  id: 'counter',
+  id: "counter",
   state: () => ({
-    counter: 0
+    count: 0,
+    title: "My Counter Title",
   }),
-  getters: {
-    doubleCount: (state) => state.counter * 2
-  },
   actions: {
-    increment() {
-      this.counter++
-    }
-  }
-})
+    increaseCounter(amount) {
+      this.count += amount;
+    },
+    decreaseCounter(amount) {
+      this.count -= amount;
+    },
+  },
+  getters: {
+    oddOrEven(state) {
+      return state.count % 2 === 0 ? "even" : "odd";
+    },
+  },
+});
+
+// make sure to pass the right store definition, `useCounterStore` in this case.
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useCounterStore, import.meta.hot));
+}
